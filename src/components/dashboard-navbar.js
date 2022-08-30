@@ -31,6 +31,7 @@ function DashboardNavbar() {
   const openNotifi = Boolean(notifi);
   const handleclicknotifi = (event) => {
     setNotifi(event.currentTarget);
+    console.log(notifi);
   };
   const handleclosenotifi = () => {
     setNotifi(null);
