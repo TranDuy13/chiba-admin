@@ -6,12 +6,12 @@ export const LoginStatus = () => {
   //set auth when have be
 //   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (user) {
+    if (1) {
       setLogin(true);
     } else {
       setLogin(false);
     }
     setChecking(false);
-  }, [user]);
+  });
   return { login, checking };
 };

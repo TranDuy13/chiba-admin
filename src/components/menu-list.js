@@ -46,7 +46,7 @@ export const MenuList = (props) => {
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       {...other}
     >
-      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/home">
+      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/">
         <MenuItem
           sx={{
             pl: "30px",
@@ -58,7 +58,7 @@ export const MenuList = (props) => {
           <HomeRoundedIcon  fontSize="large" sx={{pr:'10px'}}/> Home
         </MenuItem>
       </Link>
-      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/">
+      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/account">
         <MenuItem
           sx={{
             pl: "30px",
@@ -72,7 +72,7 @@ export const MenuList = (props) => {
       </Link>
 
       <Divider />
-      <Link style={{ textDecoration: "none",color:'#333333' }} to="/account">
+      <Link style={{ textDecoration: "none",color:'#333333' }} to="/products">
         <MenuItem
           sx={{
             pl: "30px",
@@ -87,7 +87,7 @@ export const MenuList = (props) => {
           Add Products
         </MenuItem>
       </Link>
-      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/account">
+      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/setting">
         <MenuItem
           sx={{
             pl: "30px",

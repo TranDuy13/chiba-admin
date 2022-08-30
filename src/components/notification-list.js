@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import NotificationsList from "./notification/notification";
 export const Notifications = (props) => {
   const { notification, openNotifi, ...other } = props;
-  console.log(props);
+ 
+  
   return (
     <Menu
       anchorEl={notification}

@@ -4,13 +4,13 @@ import MoneyIcon from '@mui/icons-material/Money';
 
 export const Budget = (props) => (
   <Card
-    sx={{ height: '100%' }}
+    sx={{ height: '100%' , backgroundColor:'#3ba1c5'}}
     {...props}
   >
-    <CardContent>
+    <CardContent >
       <Grid
         container
-        spacing={3}
+        spacing={6}
         sx={{ justifyContent: 'space-between' }}
       >
         <Grid item>

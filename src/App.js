@@ -11,6 +11,9 @@ import NotFound from "./pages/NotFoundPage";
 import Account from "./pages/Account";
 import StatusOrder from "./pages/StatusOrder";
 import Payment from "./pages/Payment";
+import Budget from "./pages/Budget";
+import PrivateRoute from "./PrivateRoute";
+import BudgetUser from "./pages/Budget";
 
 function App() {
   return (
@@ -18,16 +21,20 @@ function App() {
       <Router>
         <div>
           <Routes>
-            <Route path="/" element={<Dashboard/>} />
-            <Route path="/register" element={<Register/>} />
+            <Route path="/register" element={<Register />} />
+
             <Route path="/login" element={<Login />} />
-            <Route path="/customer" element={<Customer />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="/setting" element={<Setting />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/products" element={<Product />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/statusOrders" element={<StatusOrder />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/customer" element={<Customer />} />
+              <Route path="/setting" element={<Setting />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/products" element={<Product />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/budget" element={<BudgetUser />} />
+              <Route path="/statusOrders" element={<StatusOrder />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>

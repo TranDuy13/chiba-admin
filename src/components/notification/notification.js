@@ -6,80 +6,65 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 const notifications = [
   {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
+    icon: <AccountCircleOutlinedIcon fontSize="large" />,
     title: "Hello. Welcome to Chiba Admin Page",
     content: "Alo Alo, hoao ho hohoh snd gag gggg aaa 2222 44444 5656565",
     to: "/",
   },
   {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
+    icon: <AccountCircleOutlinedIcon fontSize="large" />,
     title: "Hello. Welcome to Chiba Admin Page",
     content: "Alo Alo, hoao ho hohoh snd gag gggg aaa 2222 44444 5656565",
     to: "/",
   },
   {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
+    icon: <AccountCircleOutlinedIcon fontSize="large" />,
     title: "Hello. Welcome to Chiba Admin Page",
     content: "Alo Alo, hoao ho hohoh snd gag gggg aaa 2222 44444 5656565",
     to: "/",
   },
   {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
+    icon: <AccountCircleOutlinedIcon fontSize="large" />,
     title: "Hello. Welcome to Chiba Admin Page",
     content: "Alo Alo, hoao ho hohssoh snd gag gggg aaa 2222 44444 5656565",
     to: "/",
   },
-  {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
-    title: "Hello. Welcome to Chiba Admin Page",
-    content: "Alo Alo, hoao ho hohoh snd gag gggg aaa 2222 44444 5656565",
-    to: "/",
-  },
-  {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
-    title: "Hello. Welcome to Chiba Admin Page",
-    content: "Alo Alo, hoao ho hohoh snd gag gggg aaa 2222 44444 5656565",
-    to: "/",
-  },
-  {
-    icon: <AccountCircleOutlinedIcon fontSize="small" />,
-    title: "Hello. Welcome to Chiba Admin Page",
-    content: "Alo Alo, hoao ho hohoh snd gag gggg aaa 2222 44444 5656565",
-    to: "/",
-  },
 ];
+
 export default function NotificationsList() {
   return (
     <>
-      {notifications.map((notification) => {
-
-          <ListItem alignItems="flex-start">
+      {notifications.map((notification) => (
+        <Link
+          to={notification.to}
+          style={{ textDecoration: "none", color: "black",}}
+        >
+          <ListItem
+            alignItems="flex-start"
+            sx={{
+              width: "400px",
+              "&:hover": {
+                backgroundColor: "#F3F3F3",
+              },
+            }}
+          >
             <ListItemAvatar>
-              <div>
-                {notification.icon}
-              </div>
+              <div>{notification.icon}</div>
             </ListItemAvatar>
             <ListItemText
-              primary="Brunch this weekend?"
+              primary={notification.title}
               secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Ali Connors
-                  </Typography>
-                 {notification.content}
-                </React.Fragment>
+                <React.Fragment>{notification.content}</React.Fragment>
               }
             />
+            <Divider />
           </ListItem>
-    
-      })}
+          <Divider />
+        </Link>
+      ))}
     </>
   );
 }

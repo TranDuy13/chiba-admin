@@ -2,7 +2,7 @@ import { DashboardLayout } from "../components/dashboard-layout";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../theme";
 import { Box, Container, Typography } from "@mui/material";
-import { LatestOrders } from "../../src/components/dashboard/latest-orders";
+import { PayMentStatus } from "../components/dashboard/payment";
 
 function Payment() {
   return (
@@ -18,7 +18,7 @@ function Payment() {
               }}
             >
               <Container maxWidth={false}>
-                <LatestOrders />
+                <PayMentStatus />
               </Container>
             </Box>
           }

@@ -3,7 +3,7 @@ import InsertChartIcon from '@mui/icons-material/InsertChartOutlined';
 
 export const TasksProgress = (props) => (
   <Card
-    sx={{ height: '100%' }}
+    sx={{ height: '100%', backgroundColor:'#3ba1c5' }}
     {...props}
   >
     <CardContent>
