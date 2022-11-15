@@ -1,4 +1,11 @@
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector, useDispatch } from "react-redux";
+import { login, reset } from "../components/features/auth/authSlice";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 import {
   Box,
   Button,
@@ -7,7 +14,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Facebook as FacebookIcon } from "../icons/facebook";
 import { Google as GoogleIcon } from "../icons/google";
@@ -16,6 +22,35 @@ import { Link } from "react-router-dom";
 function Login() {
   useEffect(() => {
     document.title = "Login - Welcome back!";
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (user || isSuccess) {
+      navigate("/");
+    }
+    dispatch(reset());
+  }, [isError, message, isSuccess, navigate, dispatch]);
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      dispatch(login(values));
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().max(255).required("Username is required"),
+      password: Yup.string().max(255).required("Password is required"),
+    }),
   });
 
   return (
@@ -33,7 +68,7 @@ function Login() {
           <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
             Dashboard
           </Button>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography color="textPrimary" variant="h4">
                 Sign in
@@ -77,29 +112,30 @@ function Login() {
               </Typography>
             </Box>
             <TextField
-              //   error={Boolean(formik.touched.email && formik.errors.email)}
+              error={Boolean(formik.touched.username && formik.errors.username)}
               fullWidth
-              //   helperText={formik.touched.email && formik.errors.email}
-              label="Email Address"
+              helperText={formik.touched.username && formik.errors.username}
+              label="Username"
               margin="normal"
-              name="email"
-              //   onBlur={formik.handleBlur}
-              //   onChange={formik.handleChange}
-              type="email"
-              //   value={formik.values.email}
+              name="username"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              type="username"
+              value={formik.values.username}
               variant="outlined"
             />
             <TextField
-              //   error={Boolean(formik.touched.password && formik.errors.password)}
+              error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
-              //   helperText={formik.touched.password && formik.errors.password}
+              helperText={formik.touched.password && formik.errors.password}
               label="Password"
               margin="normal"
               name="password"
-              //   onBlur={formik.handleBlur}
-              //   onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              // onChange={onChange}
+              onChange={formik.handleChange}
               type="password"
-              //   value={formik.values.password}
+              value={formik.values.password}
               variant="outlined"
             />
             <Box sx={{ py: 2 }}>
@@ -120,7 +156,7 @@ function Login() {
                 variant="subtitle2"
                 underline="hover"
                 style={{ textDecoration: "none" }}
-                to="/"
+                to="/register"
               >
                 Sign Up
               </Link>
@@ -128,6 +164,7 @@ function Login() {
           </form>
         </Container>
       </Box>
+      <ToastContainer />
     </>
   );
 }

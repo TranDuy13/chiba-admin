@@ -46,6 +46,7 @@ function Product() {
           }
         </DashboardLayout>
       </ThemeProvider>
+      
     </>
   );
 }

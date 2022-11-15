@@ -1,5 +1,5 @@
-
-import * as Yup from 'yup';
+import * as Yup from "yup";
+import { useFormik } from "formik";
 import {
   Box,
   Button,
@@ -7,175 +7,155 @@ import {
   Container,
   FormHelperText,
   TextField,
-  Typography
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+  Typography,
+} from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { registerUser, reset } from "../components/features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Register = () => {
-//   const router = useRouter();
-//   const formik = useFormik({
-//     initialValues: {
-//       email: '',
-//       firstName: '',
-//       lastName: '',
-//       password: '',
-//       policy: false
-//     },
-//     validationSchema: Yup.object({
-//       email: Yup
-//         .string()
-//         .email(
-//           'Must be a valid email')
-//         .max(255)
-//         .required(
-//           'Email is required'),
-//       firstName: Yup
-//         .string()
-//         .max(255)
-//         .required(
-//           'First name is required'),
-//       lastName: Yup
-//         .string()
-//         .max(255)
-//         .required(
-//           'Last name is required'),
-//       password: Yup
-//         .string()
-//         .max(255)
-//         .required(
-//           'Password is required'),
-//       policy: Yup
-//         .boolean()
-//         .oneOf(
-//           [true],
-//           'This field must be checked'
-//         )
-//     }),
-//     onSubmit: () => {
-//       router.push('/');
-//     }
-//   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isError, isSuccess, message } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      navigate("/login");
+    }
+    dispatch(reset());
+  }, [isError, message, isSuccess, navigate, dispatch]);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      username: "",
+      name: "",
+      phone: "",
+      password: "",
+      address: "",
+      role: "SELLER",
+    },
+    onSubmit: (values) => {
+      dispatch(registerUser(values));
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Must be a valid email")
+        .max(255)
+        .required("Email is required"),
+      name: Yup.string().max(255).required(" Name is required"),
+      username: Yup.string().max(255).required(" Username is required"),
+      address: Yup.string().max(255).required(" Address is required"),
+      phone: Yup.number().required("Phone is required"),
+      password: Yup.string().max(255).required("Password is required"),
+    }),
+  });
 
   return (
     <>
       <Box
         component="main"
         sx={{
-          alignItems: 'center',
-          display: 'flex',
+          alignItems: "center",
+          display: "flex",
           flexGrow: 1,
-          minHeight: '100%'
+          minHeight: "100%",
         }}
       >
         <Container maxWidth="sm">
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Dashboard
-            </Button>
+          <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
+            Dashboard
+          </Button>
 
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
-              <Typography
-                color="textPrimary"
-                variant="h4"
-              >
+              <Typography color="textPrimary" variant="h4">
                 Create a new account
               </Typography>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant="body2"
-              >
+              <Typography color="textSecondary" gutterBottom variant="body2">
                 Use your email to create a new account
               </Typography>
             </Box>
             <TextField
-            //   error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+              error={Boolean(formik.touched.name && formik.errors.name)}
               fullWidth
-            //   helperText={formik.touched.firstName && formik.errors.firstName}
-              label="First Name"
+              helperText={formik.touched.name && formik.errors.name}
+              label="Name"
               margin="normal"
-              name="firstName"
-            //   onBlur={formik.handleBlur}
-            //   onChange={formik.handleChange}
-            //   value={formik.values.firstName}
+              name="name"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.name}
               variant="outlined"
             />
             <TextField
-            //   error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+              error={Boolean(formik.touched.username && formik.errors.username)}
               fullWidth
-            //   helperText={formik.touched.lastName && formik.errors.lastName}
-              label="Last Name"
+              helperText={formik.touched.username && formik.errors.username}
+              label="Username"
               margin="normal"
-              name="lastName"
-            //   onBlur={formik.handleBlur}
-            //   onChange={formik.handleChange}
-            //   value={formik.values.lastName}
+              name="username"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.username}
               variant="outlined"
             />
             <TextField
-            //   error={Boolean(formik.touched.email && formik.errors.email)}
+              error={Boolean(formik.touched.phone && formik.errors.phone)}
               fullWidth
-            //   helperText={formik.touched.email && formik.errors.email}
+              helperText={formik.touched.phone && formik.errors.phone}
+              label=" Phone"
+              margin="normal"
+              type="number"
+              name="phone"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.phone}
+              variant="outlined"
+            />
+            <TextField
+              error={Boolean(formik.touched.email && formik.errors.email)}
+              fullWidth
+              helperText={formik.touched.email && formik.errors.email}
               label="Email Address"
               margin="normal"
               name="email"
-            //   onBlur={formik.handleBlur}
-            //   onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               type="email"
-            //   value={formik.values.email}
+              value={formik.values.email}
               variant="outlined"
             />
             <TextField
-            //   error={Boolean(formik.touched.password && formik.errors.password)}
+              error={Boolean(formik.touched.address && formik.errors.address)}
               fullWidth
-            //   helperText={formik.touched.password && formik.errors.password}
+              helperText={formik.touched.address && formik.errors.address}
+              label="Address"
+              margin="normal"
+              name="address"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.address}
+              variant="outlined"
+            />
+            <TextField
+              error={Boolean(formik.touched.password && formik.errors.password)}
+              fullWidth
+              helperText={formik.touched.password && formik.errors.password}
               label="Password"
               margin="normal"
               name="password"
-            //   onBlur={formik.handleBlur}
-            //   onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               type="password"
-            //   value={formik.values.password}
+              value={formik.values.password}
               variant="outlined"
             />
-            <Box
-              sx={{
-                alignItems: 'center',
-                display: 'flex',
-                ml: -1
-              }}
-            >
-              <Checkbox
-                // checked={formik.values.policy}
-                name="policy"
-                // onChange={formik.handleChange}
-              />
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                I have read the
-                {' '}
 
-                  <Link to='/'
-                    color="primary"
-                    underline="always"
-                    variant="subtitle2"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    Terms and Conditions
-                  </Link>
-              </Typography>
-            </Box>
-            {/* {Boolean(formik.touched.policy && formik.errors.policy) && (
-              <FormHelperText error>
-                {formik.errors.policy}
-              </FormHelperText>
-            )} */}
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
@@ -188,25 +168,21 @@ const Register = () => {
                 Sign Up Now
               </Button>
             </Box>
-            <Typography
-              color="textSecondary"
-              variant="body2"
-            >
-              Have an account?
-              {' '}
-                <Link
-                  variant="subtitle2"
-                  underline="hover"
-                  style={{ textDecoration: 'none' }}
-                  to='/'
-                >
-                  Sign In
-                </Link>
-    
+            <Typography color="textSecondary" variant="body2">
+              Have an account?{" "}
+              <Link
+                variant="subtitle2"
+                underline="hover"
+                style={{ textDecoration: "none" }}
+                to="/"
+              >
+                Sign In
+              </Link>
             </Typography>
           </form>
         </Container>
       </Box>
+      <ToastContainer />
     </>
   );
 };

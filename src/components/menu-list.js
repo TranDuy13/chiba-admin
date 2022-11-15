@@ -1,5 +1,5 @@
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,8 +8,15 @@ import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { Button } from "@mui/material";
+import { logout } from "./features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 export const MenuList = (props) => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   const { anchorEl, open, ...other } = props;
   return (
     <Menu
@@ -46,7 +53,7 @@ export const MenuList = (props) => {
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       {...other}
     >
-      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/">
+      <Link style={{ textDecoration: "none", color: "#333333" }} to="/">
         <MenuItem
           sx={{
             pl: "30px",
@@ -55,10 +62,10 @@ export const MenuList = (props) => {
             pt: "20px",
           }}
         >
-          <HomeRoundedIcon  fontSize="large" sx={{pr:'10px'}}/> Home
+          <HomeRoundedIcon fontSize="large" sx={{ pr: "10px" }} /> Home
         </MenuItem>
       </Link>
-      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/account">
+      <Link style={{ textDecoration: "none", color: "#333333" }} to="/account">
         <MenuItem
           sx={{
             pl: "30px",
@@ -67,12 +74,13 @@ export const MenuList = (props) => {
             pt: "20px",
           }}
         >
-          <AccountCircleOutlinedIcon fontSize='large' sx={{pr:'10px'}} /> My account
+          <AccountCircleOutlinedIcon fontSize="large" sx={{ pr: "10px" }} /> My
+          account
         </MenuItem>
       </Link>
 
       <Divider />
-      <Link style={{ textDecoration: "none",color:'#333333' }} to="/products">
+      <Link style={{ textDecoration: "none", color: "#333333" }} to="/products">
         <MenuItem
           sx={{
             pl: "30px",
@@ -87,7 +95,7 @@ export const MenuList = (props) => {
           Add Products
         </MenuItem>
       </Link>
-      <Link style={{ textDecoration: "none" ,color:'#333333'}} to="/setting">
+      <Link style={{ textDecoration: "none", color: "#333333" }} to="/setting">
         <MenuItem
           sx={{
             pl: "30px",
@@ -102,7 +110,10 @@ export const MenuList = (props) => {
           Settings
         </MenuItem>
       </Link>
-      <Link style={{ textDecoration: "none",color:'#333333' }} to="/account">
+      <Button
+        onClick={handleLogout}
+        style={{ textDecoration: "none", color: "#333333" }}
+      >
         <MenuItem
           sx={{
             pl: "30px",
@@ -116,7 +127,7 @@ export const MenuList = (props) => {
           </ListItemIcon>
           Logout
         </MenuItem>
-      </Link>
+      </Button>
     </Menu>
   );
 };
