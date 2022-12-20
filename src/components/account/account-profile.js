@@ -22,7 +22,7 @@ function AccountProfile() {
           }}
         >
           <Avatar
-            src={user.avatar}
+            src={user.data.admin.avt.url}
             sx={{
               height: 64,
               mb: 2,
@@ -43,9 +43,7 @@ function AccountProfile() {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button color="primary" fullWidth variant="text">
-          Upload picture
-        </Button>
+  
       </CardActions>
     </Card>
   );

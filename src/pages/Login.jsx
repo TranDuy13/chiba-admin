@@ -19,7 +19,7 @@ import { Facebook as FacebookIcon } from "../icons/facebook";
 import { Google as GoogleIcon } from "../icons/google";
 import { Link } from "react-router-dom";
 
-function Login() {
+function LoginSeller() {
   useEffect(() => {
     document.title = "Login - Welcome back!";
   });
@@ -44,7 +44,6 @@ function Login() {
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       dispatch(login(values));
     },
     validationSchema: Yup.object({
@@ -169,4 +168,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginSeller;

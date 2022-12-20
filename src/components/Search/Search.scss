@@ -1,0 +1,115 @@
+.search-wrapper {
+  min-width: inherit;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  z-index: 300;
+  box-sizing: border-box;
+  .container {
+    display: flex;
+    height: 5.3125rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0 0.625rem;
+    width: inherit;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+    .svg-icon {
+      padding: 2px;
+      margin: -2px;
+      border-radius: 2px;
+    }
+  }
+}
+.shopee-icon {
+  display: flex;
+  width: 169px;
+  fill: #fff;
+}
+.item-search {
+  --focus-indicator-spacing: 3px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.09);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 2.5rem;
+  box-sizing: border-box;
+  padding: 0.1875rem;
+  border-radius: 2px;
+  background: #fff;
+  .item-input-search {
+    flex: 1 0;
+    position: relative;
+    .form-search {
+      background-color: #fff;
+      border-color: #fff;
+      display: flex;
+      flex: 1;
+      box-sizing: border-box;
+      padding: 0 0.625rem;
+      position: relative;
+    }
+    .minWidth-search{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 60px;
+      max-width: 190px;
+      border-radius: 2px;
+      .search-icon{
+        color:#fff;
+      }
+      .search-cart{
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        padding-right:20px;
+        padding-bottom: 5px;
+        margin: 0 10px;
+        box-sizing: border-box;
+        .search-cart-wrapper{
+          padding: 10px 0;
+          .cart{
+            color:white;
+          }
+        }
+      }
+    }
+  }
+}
+.search-cart{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding-right:40px;
+  padding-bottom: 5px;
+  margin: 0 10px;
+  box-sizing: border-box;
+  .search-cart-wrapper{
+    padding: 10px 0;
+    .cart{
+      color:white;
+    }
+    .number {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--brand-primary-color, #ee4d2d);
+      width: 2.125rem;
+      top: -6px;
+      left: -10px;
+      position: relative;
+      border-radius: 2.75rem;
+      min-width: 0.6875rem;
+      line-height: 1.2em;
+      padding: 0 0.3125rem;
+      text-align: center;
+      height: 1rem;
+      color: var(--brand-primary-color, #ee4d2d);
+      background-color: #fff;
+      margin-right: -0.875rem;
+    }
+  }
+}

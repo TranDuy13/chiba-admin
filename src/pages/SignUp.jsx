@@ -16,7 +16,7 @@ import { registerUser, reset } from "../components/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-const Register = () => {
+const RegisterSeller = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError, isSuccess, message } = useSelector((state) => state.auth);
@@ -187,4 +187,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterSeller;

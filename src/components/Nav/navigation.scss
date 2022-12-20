@@ -1,0 +1,38 @@
+.navigation{
+    display: flex;
+    .shopee{
+        display: flex;
+        align-items: center;
+        width: 1200px;
+        margin: 0 auto;
+        padding-bottom: 15px;
+        justify-content: space-between;
+         .group-shopee{
+            display: flex;
+            align-items: center;
+            margin: 18px;
+        .iconShopee{
+            height: 40px;
+            margin-right: 10px;
+        }
+        .register{
+            padding-top: 10px;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-left: 10px;
+            line-height: 1.2;
+        }
+
+    }
+    }
+   
+    .support{
+        text-decoration: none;
+        padding-top: 10px;
+        color: #ee4d2d;
+        font-size: .875rem;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+
+}

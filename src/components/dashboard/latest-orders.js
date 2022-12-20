@@ -26,7 +26,7 @@ const orders = [
     ref: "CDD1049",
     amount: 30.5,
     customer: {
-      name: "Ekaterina Tankova",
+      name: "Trần Nhật Duy",
     },
     createdAt: 1555016400000,
     status: "pending",
@@ -36,7 +36,7 @@ const orders = [
     ref: "CDD1048",
     amount: 25.1,
     customer: {
-      name: "Cao Yu",
+      name: "Phạm Văn Du",
     },
     createdAt: 1555016400000,
     status: "delivered",
@@ -46,7 +46,7 @@ const orders = [
     ref: "CDD1047",
     amount: 10.99,
     customer: {
-      name: "Alexa Richardson",
+      name: "Đinh Nho Nam",
     },
     createdAt: 1554930000000,
     status: "refunded",
@@ -56,7 +56,7 @@ const orders = [
     ref: "CDD1046",
     amount: 96.43,
     customer: {
-      name: "Anje Keizer",
+      name: "Nguyễn Xuân Tiến",
     },
     createdAt: 1554757200000,
     status: "pending",
@@ -66,7 +66,7 @@ const orders = [
     ref: "CDD1045",
     amount: 32.54,
     customer: {
-      name: "Clarke Gillebert",
+      name: "Phạm Văn Khánh",
     },
     createdAt: 1554670800000,
     status: "delivered",
@@ -78,7 +78,7 @@ const orders = [
     customer: {
       name: "Adam Denisov",
     },
-    createdAt: 1554670800000,
+    createdAt: '',
     status: "delivered",
   },
   {
@@ -88,7 +88,7 @@ const orders = [
     customer: {
       name: "Adam Denisov",
     },
-    createdAt: 1554670800000,
+   createdAt: 1988870800000,
     status: "delivered",
   },
   {
@@ -98,7 +98,7 @@ const orders = [
     customer: {
       name: "Adam Denisov",
     },
-    createdAt: 1554670800000,
+   createdAt: 1988870800000,
     status: "pending",
   },
   {
@@ -108,7 +108,7 @@ const orders = [
     customer: {
       name: "Alexa Richardson",
     },
-    createdAt: 1554930000000,
+    createdAt: 333930000000,
     status: "refunded",
   },
   {
@@ -118,7 +118,7 @@ const orders = [
     customer: {
       name: "Alexa Richardson",
     },
-    createdAt: 1554930000000,
+   createdAt: 1988870800000,
     status: "refunded",
   },
   {
@@ -128,7 +128,7 @@ const orders = [
     customer: {
       name: "Anje Keizer",
     },
-    createdAt: 1554757200000,
+   createdAt: 1988870800000,
     status: "pending",
   },
   {
@@ -138,7 +138,7 @@ const orders = [
     customer: {
       name: "Clarke Gillebert",
     },
-    createdAt: 1554670800000,
+   createdAt: 1988870800000,
     status: "delivered",
   },
   {
@@ -148,7 +148,7 @@ const orders = [
     customer: {
       name: "Adam Denisov",
     },
-    createdAt: 1554670800000,
+   createdAt: 1988870800000,
     status: "delivered",
   },
 ];
@@ -178,16 +178,16 @@ useEffect(()=>{
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Order Ref</TableCell>
-                <TableCell>Customer</TableCell>
+                <TableCell>ID Đơn Hàng</TableCell>
+                <TableCell>Khách Hàng</TableCell>
                 <TableCell sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
                     <TableSortLabel active direction="desc">
-                      Date
+                      Ngày Đặt Hàng
                     </TableSortLabel>
                   </Tooltip>
                 </TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell>Trạng Thái</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

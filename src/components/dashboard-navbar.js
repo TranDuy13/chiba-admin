@@ -10,6 +10,7 @@ import {
   Toolbar,
   Tooltip,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import { Notifications } from "./notification-list";
 import { MenuList } from "./menu-list";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,6 +26,9 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 }));
 
 function DashboardNavbar() {
+  const { users, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [notifi, setNotifi] = useState(null);
@@ -112,7 +116,7 @@ function DashboardNavbar() {
                   width: 40,
                   ml: 1,
                 }}
-                src="/static/images/avatars/avatar_1.png"
+                src={users.data.admin.avt.url}
               >
                 <UserCircleIcon fontSize="small" />
               </Avatar>

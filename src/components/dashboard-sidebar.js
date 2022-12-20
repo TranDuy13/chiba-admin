@@ -14,53 +14,45 @@ import PaidIcon from '@mui/icons-material/Paid';
 import { XCircle as XCircleIcon } from "../icons/x-circle";
 import { Logo } from "./logo";
 import { NavItem } from "./nav-item";
+import NavBottom from "./NavBottom/navBottom";
 
 const items = [
   {
-    href: "/",
+    href: "/seller",
     icon: <ChartBarIcon fontSize="small" />,
-    title: "Dashboard",
+    title: "Doanh Thu",
   },
+  // {
+  //   href: "/seller/customer",
+  //   icon: <UsersIcon fontSize="small" />,
+  //   title: "Khách Hàng",
+  // },
   {
-    href: "/customer",
-    icon: <UsersIcon fontSize="small" />,
-    title: "Customers",
-  },
-  {
-    href: "/products",
+    href: "/seller/products",
     icon: <ShoppingBagIcon fontSize="small" />,
-    title: "Products",
+    title: "Sản phẩm ",
   },
+
   {
-    href: "/account",
-    icon: <UserIcon fontSize="small" />,
-    title: "Account",
-  },
-  {
-    href: "/budget",
-    icon: <PaidIcon fontSize="small" />,
-    title: "Budget",
-  },
-  {
-    href: "/statusOrders",
+    href: "/seller/statusOrders",
     icon: <AutorenewIcon fontSize="small" />,
-    title: "Status Orders",
+    title: "Trạng Thái Đơn Hàng",
   },
   {
-    href: "/payment",
+    href: "/seller/add",
     icon: <PaymentRoundedIcon fontSize="small" />,
-    title: "Payment",
+    title: "Thêm Sản phẩm",
   },
-  {
-    href: "/setting",
-    icon: <CogIcon fontSize="small" />,
-    title: "Settings",
-  },
-  {
-    href: "/404",
-    icon: <XCircleIcon fontSize="small" />,
-    title: "Error",
-  },
+  // {
+  //   href: "/setting",
+  //   icon: <CogIcon fontSize="small" />,
+  //   title: "Settings",
+  // },
+  // {
+  //   href: "/404",
+  //   icon: <XCircleIcon fontSize="small" />,
+  //   title: "Error",
+  // },
 ];
 
 export const DashboardSidebar = () => {
@@ -131,6 +123,7 @@ export const DashboardSidebar = () => {
           }}
         ></Box>
       </Box>
+      <NavBottom/>
     </>
   );
 
