@@ -85,7 +85,7 @@ function ProductItem() {
 
         dispatch(getProduct(id))
 
-    }, [dispatch])
+    }, [dispatch,id])
     useEffect(() => {
         dispatch(reset())
         if (isSuccess) {

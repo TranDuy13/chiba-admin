@@ -39,7 +39,7 @@ function Search() {
           <div className="search-cart">
             <div className="search-cart-wrapper">
               <Link
-                to=""
+                to="/cart"
                 className="flex items-center cursor-pointer relative ml-1 overflow-visible outline-none"
               >
                 <svg

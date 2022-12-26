@@ -11,7 +11,7 @@ const getProductbyseller = async (data) => {
   return response.data;
 };
 const getAllProduct = async () => {
-  const response = await axios.post(`${API_URL}/get/allProduct`);
+  const response = await axios.get(`${API_URL}/get/allProduct`);
   return response.data;
 }
 const updateProduct = async (data) => {
@@ -24,7 +24,7 @@ const gettypeProduct = async (data) => {
   return response.data;
 };
 const getProduct = async (id) => {
-  const response = await axios.get(`${API_URL}/${id}`);
+  const response = await axios.get(`${API_URL}/item/${id}`);
   return response.data;
 };
 const deleteProduct = async (id) => {

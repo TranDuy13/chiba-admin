@@ -15,7 +15,7 @@ function ListProduct() {
   const handleClick = () => {
     setPage(page + 1);
   };
-  if(products!=null){
+  if (products != null) {
     return (
       <>
         <div className="bg-gray-09 border-b-[5px] border-[#ee4d2d] ">
@@ -29,7 +29,8 @@ function ListProduct() {
                 <div className="w-[101%] h-full relative ">
                   <div className="flex flex-wrap ">
                     {products.data.map((item) => (
-              
+
+                      <Link to={`/product/${item._id}`}>
                         <div className=" flex cursor-pointer bg-white m-[5px] h-full hover:border-[1px] hover:border-[#ee4d2d] hover:border-b-[3px]">
                           <div className="border-r-[1px] border-b-[1px] max-w-[190px] h-[auto] flex items-center justify-center flex-col ">
                             <div className=" mt-[10%] overflow-visible ">
@@ -58,17 +59,17 @@ function ListProduct() {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div></Link>
                     ))}
                   </div>
                   <div className="flex w-full justify-center my-[15px]">
-                  {products.data.length > page*18 ? (
+                    {products.data.length > page * 18 ? (
                       <button className="bg-white p-3" onClick={handleClick}>
                         <Link to="">Xem thêm</Link>
                       </button>
                     ) : <button className=" p-3 text-gray-54 leading-7">
-                    HẾT
-                  </button>}
+                      HẾT
+                    </button>}
                   </div>
                 </div>
               </div>
