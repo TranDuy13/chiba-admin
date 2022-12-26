@@ -4,18 +4,34 @@ import { Box, Divider, Drawer, useMediaQuery } from "@mui/material";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import PaymentRoundedIcon from '@mui/icons-material/PaymentRounded';
 import { ChartBar as ChartBarIcon } from "../icons/chart-bar";
-import { Cog as CogIcon } from "../icons/cog";
-import { Lock as LockIcon } from "../icons/lock";
+import MarkUnreadChatAltIcon from "@mui/icons-material/MarkUnreadChatAlt";
 import { ShoppingBag as ShoppingBagIcon } from "../icons/shopping-bag";
-import { User as UserIcon } from "../icons/user";
-import { UserAdd as UserAddIcon } from "../icons/user-add";
-import { Users as UsersIcon } from "../icons/users";
-import PaidIcon from '@mui/icons-material/Paid';
-import { XCircle as XCircleIcon } from "../icons/x-circle";
+import Chat from "../pages/Chat";
+import { useState } from "react";
 import { Logo } from "./logo";
 import { NavItem } from "./nav-item";
-import NavBottom from "./NavBottom/navBottom";
 
+const ChatMini = (props) => {
+  const { open } = props;
+  return (
+    <div
+      style={{
+        position: "fixed",
+        zIndex: "999",
+        right: "25px",
+        bottom: "25px",
+      }}
+      className=""
+    >
+      <button onClick={open}>
+        <div className="flex items-center box-border text-white h-48px relative w-full justify-center bg-[#ee4d2d] px-[20px] py-[10px]">
+          <MarkUnreadChatAltIcon sx={{marginRight:'8px'}}/>
+          Chat
+        </div>
+      </button>
+    </div>
+  );
+};
 const items = [
   {
     href: "/seller",
@@ -60,6 +76,10 @@ export const DashboardSidebar = () => {
     defaultMatches: true,
     noSsr: false,
   });
+  const [open, setOpen] = useState(true);
+  const handleOpen = () => {
+    setOpen(!open);
+  };
   const content = (
     <>
       <Box
@@ -123,7 +143,7 @@ export const DashboardSidebar = () => {
           }}
         ></Box>
       </Box>
-      <NavBottom/>
+      {!open ? <Chat open={handleOpen}/> : <ChatMini open={handleOpen} />}
     </>
   );
 

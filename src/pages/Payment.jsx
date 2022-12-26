@@ -1,19 +1,100 @@
 import { DashboardLayout } from "../components/dashboard-layout";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../theme";
-import { Box, Container, Typography } from "@mui/material";
-import { PayMentStatus } from "../components/dashboard/payment";
-import { useEffect, useState } from "react";
+import { Box, Container } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
+import { createProduct, reset } from "../components/features/product/productSlice";
+import { toast,ToastContainer } from "react-toastify";
+const items = [
+  {
+    catelog: "Thời Trang Nam",
+
+  },
+  {
+    catelog: "Điện Thoại & Phụ Kiện",
+
+  },
+  {
+    catelog: "Thiết Bị Điện tử",
+
+  },
+  {
+    catelog: "Máy tính & LapTop",
+
+  },
+  {
+    catelog: "Máy Ảnh & Máy Quay",
+
+  },
+  {
+    catelog: "Đồng hồ",
+
+  },
+  {
+    catelog: "Giày Dép nam",
+
+  },
+  {
+    catelog: "Thời Trang nữ",
+
+  },
+  {
+    catelog: "Thiết Bị Gia Dụng",
+
+  },
+  {
+    catelog: "Thể Thao",
+
+  },
+  {
+    catelog: "Xe Máy & Xe Đạp",
+
+  },
+  {
+    catelog: "Mẹ & Bé",
+
+  },
+  {
+    catelog: "Nhà Cửa & Đời Sống",
+
+  },
+  {
+    catelog: "Giày Dép Nữ",
+
+  },
+  {
+    catelog: "Túi Ví Nữ",
+
+  },
+  {
+    catelog: "Nhà Sách Online"
+  },
+];
 function Payment() {
-  const { users, isSuccess, isError, message } = useSelector(
+  const { isSuccess, isError, message } = useSelector(
+    (state) => state.product
+  );
+  const { users } = useSelector(
     (state) => state.auth
   );
-  const dispatch = useDispatch();
-  const handleChange = (e) => {
-    const reader = new FileReader();
 
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(reset())
+  },[dispatch])
+  useEffect(()=>{
+   
+    if(isSuccess&&message!=""){
+      toast.success(message)
+    }
+    if(isError){
+      toast.error(message)
+    }
+  },[isSuccess,isError,message])
+  const handleChange = (e) => {
+    const reader = new FileReader()
     reader.onload = () => {
       if (reader.readyState === 2) {
         setAvatarPreview(reader.result);
@@ -34,9 +115,11 @@ function Payment() {
       quantity: e.target.quantity.value,
       price: e.target.price.value,
       description: e.target.description.value,
-      image:  avatarPreview,
+      image: avatarPreview,
     };
-    console.log(data);
+
+
+    dispatch(createProduct(data))
 
   };
   return (
@@ -105,9 +188,18 @@ function Payment() {
                                         type="text"
                                         name="catelogry"
                                         required
+                                        list="cat"
                                         style={{ outline: "none" }}
                                         className="w-[75%] box-border pl-[20px]"
                                       />
+                                        <datalist id="cat">
+
+                                          {
+                                            items.map(item => (<option value={item.catelog} />))
+                                          }
+
+                                        </datalist>
+                                   
                                     </div>
                                   </div>
                                 </div>
@@ -140,6 +232,7 @@ function Payment() {
                                         id="quantity"
                                         name="quantity"
                                         required
+                                        min='1'
                                       />
                                     </div>
                                   </div>
@@ -157,6 +250,7 @@ function Payment() {
                                         id="price"
                                         name="price"
                                         required
+                                        min='10000'
                                       />
                                     </div>
                                   </div>
@@ -208,9 +302,12 @@ function Payment() {
                 </div>
               </Container>
             </Box>
+            
           }
+          <ToastContainer />
         </DashboardLayout>
       </ThemeProvider>
+     
     </>
   );
 }

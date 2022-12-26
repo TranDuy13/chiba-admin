@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Category() {
   const items = [
     {
@@ -78,7 +79,7 @@ function Category() {
               <div className="w-full h-full relative ">
                 <div className="flex flex-wrap ">
                   {items.map((item) => (
-                    <div className=" flex hover:shadow-lg cursor-pointer ">
+                    <Link to={`/type/${item.catelog}`}>       <div className=" flex hover:shadow-lg cursor-pointer ">
                       <div className="border-r-[1px] border-b-[1px] w-[150px] h-[auto] flex items-center justify-center flex-col ">
                         <div className="shrink-[1] w-[70%] h-[70%] mt-[10%] ">
                           <div className="relative ">
@@ -91,7 +92,8 @@ function Category() {
                           {item.catelog}
                         </div>
                       </div>
-                    </div>
+                    </div></Link>
+
                   ))}
                 </div>
               </div>

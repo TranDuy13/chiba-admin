@@ -23,6 +23,7 @@ import PrivateRouteSeller from "./PrivateRouteSeller";
 import RegisterSeller from "./pages/RegisterSeller";
 import Verify from "./pages/Verify";
 import DetailProduct from "./pages/DetailProduct";
+import ProductItem from "./pages/ProductItem";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             
             <Route path="/register" element={<Register />} />
+            <Route path="/type/:id" element={<AllProduct />} />
             <Route path="/product" element={<AllProduct />} />
             <Route path="/product/:id" element={<DetailProduct />} />
             <Route path="/" element={<PrivateRoute />}>
@@ -47,6 +49,7 @@ function App() {
                 <Route path="/seller/setting" element={<Setting />} />
                 <Route path="/seller/account" element={<Account />} />
                 <Route path="/seller/products" element={<Product />} />
+                <Route path="/seller/products/:id" element={<ProductItem />} />
                 <Route path="/seller/add" element={<Payment />} />
                 <Route path="/seller/budget" element={<BudgetUser />} />
                 <Route path="/seller/statusOrders" element={<StatusOrder />} />

@@ -1,10 +1,11 @@
 import { configureStore} from '@reduxjs/toolkit'
 import authReducer from '../components/features/auth/authSlice'
 import chatbotReducer from '../components/features/chatbot/chatbotSlice'
+import productReducer from '../components/features/product/productSlice'
  const store = configureStore({
     reducer:{
         auth: authReducer,
-        // schedule: listReducer,
+        product: productReducer,
         // contract: contractReducer,
         ai:chatbotReducer
     }

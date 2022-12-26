@@ -1,114 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Bottom from "../components/Bottom/Bottom";
 import Header from "../components/Header/Header";
 import NavBottom from "../components/NavBottom/navBottom";
 import "../components/product.scss";
+import { getAllProduct, gettypeProduct, reset } from "../components/features/product/productSlice";
+import { useDispatch,useSelector } from "react-redux";
 function AllProduct() {
-  const items = [
-    {
-      catelog:
-        "Thời Trang NaTrang NaTrang NaTrang NaTrang NaTrang NaTrang NaTrang NaTrang NaTrang Nam",
-      imgPath: "https://cf.shopee.vn/file/sg-11134201-22120-jik8q4xv2tkv4b_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-    {
-      catelog: "Điện Thoại & Phụ Kiện",
-      imgPath: "https://cf.shopee.vn/file/31234a27876fb89cd522d7e3db1ba5ca_tn",
-    },
-  ];
+  const { products } = useSelector(
+    (state) => state.product
+  );
+  const {id} =useParams()
   const [page, setPage] = useState(1);
+  const dispatch =useDispatch()
+  useEffect(()=>{
+    dispatch(reset())
+    if(id){
+      dispatch(gettypeProduct({category:id}))
+    }
+    // if(!id){
+    //   dispatch(getAllProduct())
+    // }
+  },[dispatch,id,reset])
   const handleClick = () => {
     setPage(page + 1);
   };
-
+if(products){
   return (
     <>
       <Header />
@@ -123,14 +40,14 @@ function AllProduct() {
                 </div>
                 <div className="w-[101%] h-full relative ">
                   <div className="flex flex-wrap ">
-                    {items.map((item, i) =>
+                    {products.data.map((item, i) =>
                       i < page * 18 ? (
                         <div className=" flex cursor-pointer bg-white m-[5px] h-full hover:border-[1px] hover:border-[#ee4d2d] hover:border-b-[3px]">
                           <div className="border-r-[1px] border-b-[1px] max-w-[190px] h-[auto] flex items-center justify-center flex-col ">
                             <div className=" mt-[10%] overflow-visible ">
                               <div className="relative ">
                                 <div className=" ">
-                                  <img src={item.imgPath} alt="" />
+                                  <img src={item.img.url} alt="" />
                                 </div>
                               </div>
                             </div>
@@ -140,7 +57,7 @@ function AllProduct() {
                                   style={{ display: "-webkit-box" }}
                                   className="product"
                                 >
-                                  {item.catelog}
+                                  {item.name_product}
                                 </div>
                               </div>
                               <div className="flex justify-center items-center pt-[5px]">
@@ -158,7 +75,7 @@ function AllProduct() {
                     )}
                   </div>
                   <div className="flex w-full justify-center my-[15px]">
-                    {items.length > page*18 ? (
+                    {products.data.length > page*18 ? (
                       <button className="bg-white p-3" onClick={handleClick}>
                         <Link to="">Xem thêm</Link>
                       </button>
@@ -175,5 +92,7 @@ function AllProduct() {
       <NavBottom/>
     </>
   );
+}
+
 }
 export default AllProduct;
