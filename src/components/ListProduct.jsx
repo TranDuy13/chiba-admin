@@ -54,7 +54,7 @@ function ListProduct() {
                                   ₫
                                 </span>
                                 <span className="text-[1rem] text-[#ee4d2d]">
-                                  {item.price}
+                                  {item.price.toLocaleString(undefined, {maximumFractionDigits:2})}
                                 </span>
                               </div>
                             </div>

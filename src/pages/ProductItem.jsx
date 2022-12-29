@@ -194,7 +194,7 @@ function ProductItem() {
                                                                                     name="catelogry"
                                                                                     required
                                                                                     list="cat"
-                                                                                    defaultValue={product.data.catelogry}
+                                                                                    defaultValue={product.data.category}
                                                                                     style={{ outline: "none" }}
                                                                                     className="w-[75%] box-border pl-[20px]"
                                                                                 />

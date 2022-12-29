@@ -56,11 +56,12 @@ function AccountProfile() {
     e.preventDefault();
     const data = {
       id: users.data.admin._id,
-      name: e.target.name.value,
+      fullname: e.target.fullname.value,
       email: e.target.email.value,
       phone: e.target.phone.value,
       birthday: e.target.birthday.value,
       identity_card: e.target.identity_card.value,
+      address: e.target.address.value,
       avatar: avatarPreview,
     };
     dispatch(updateProfile(data));
@@ -106,9 +107,9 @@ function AccountProfile() {
                                 style={{ outline: "none" }}
                                 className="w-[75%] box-border pl-[20px]"
                                 required
-                                id="name"
-                                name="name"
-                                defaultValue={users.data.admin.name}
+                                id="fullname"
+                                name="fullname"
+                                defaultValue={users.data.admin.fullname}
                               />
                             </div>
                           </div>
@@ -144,6 +145,24 @@ function AccountProfile() {
                                 required
                                 className="w-[75%] box-border pl-[20px]"
                                 defaultValue={users.data.admin.phone}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="w-[602px] mb-[30px]">
+                          <div className="flex items-center justify-end">
+                            <div className="w-[25%] box-border pl-[20px] text-[rgba(85,85,85,.8)]">
+                              Địa chỉ
+                            </div>
+                            <div className="flex items-center  ml-[20px] box-border w-[75%] h-[40px] overflow-hidden rounded-sm border-[1px] border-[rgba(0,0,0,.14)]">
+                              <input
+                                style={{ outline: "none" }}
+                                id="address"
+                                name="address"
+                                required
+                                className="w-[75%] box-border pl-[20px]"
+                                defaultValue={users.data.admin.address}
                               />
                             </div>
                           </div>

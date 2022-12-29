@@ -32,14 +32,14 @@ export const AccountProfileDetails = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      name: user.data.admin.name,
+      fullname: user.data.admin.fullname,
       phone: user.data.admin.phone,
       address: user.data.admin.address,
       email: user.data.admin.email,
     },
     onSubmit: (values) => {},
     validationSchema: Yup.object({
-      name: Yup.string().max(255).required("Name is required"),
+      fullname: Yup.string().max(255).required("Name is required"),
       phone: Yup.number().required("Phone is required"),
       email: Yup.string()
         .email("Must be a valid email")
@@ -57,16 +57,16 @@ export const AccountProfileDetails = (props) => {
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                error={Boolean(formik.touched.name && formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
+                error={Boolean(formik.touched.fullname && formik.errors.fullname)}
+                helperText={formik.touched.fullname && formik.errors.fullname}
                 label="Name"
-                name="name"
+                name="fullname"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 variant="outlined"
                 required
                 // defaultValue={user.data.admin.name}
-                value={formik.values.name}
+                value={formik.values.fullname}
               />
             </Grid>
             <Grid item md={6} xs={12}>

@@ -74,7 +74,7 @@ function Product() {
                                     ₫
                                   </span>
                                   <span className="text-[1rem] text-[#ee4d2d]">
-                                    {product.price}
+                                    {product.price.toLocaleString(undefined, {maximumFractionDigits:2})}
                                   </span>
                                 </div>
                               </div>

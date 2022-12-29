@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
 import shopee from "../../img/shopee-icon.png";
 import "./Search.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { reset,getCartByUser } from "../features/cart/cartSlice";
 function Search() {
+  const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(reset())
+  })
+  useEffect(() => {
+    if(user){
+      dispatch(getCartByUser(user.data.admin._id));
+    
+    }
+  }, [user, dispatch]);
+
   return (
+    
     <>
       <div className="search-wrapper">
         <div className="container">
@@ -55,8 +72,9 @@ function Search() {
                     strokeLinejoin="round"
                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                   />
-                </svg>
-                <span className="number">10</span>
+                </svg>{
+                  cart!=null&&cart!=''?(<span className="number">{cart.length}</span>):null
+                }
               </Link>
             </div>
           </div>

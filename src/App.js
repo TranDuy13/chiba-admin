@@ -24,6 +24,7 @@ import RegisterSeller from "./pages/RegisterSeller";
 import Verify from "./pages/Verify";
 import DetailProduct from "./pages/DetailProduct";
 import ProductItem from "./pages/ProductItem";
+import Shop from "./pages/Shop";
 
 function App() {
   return (
@@ -33,11 +34,12 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
-            
+         
             <Route path="/register" element={<Register />} />
             <Route path="/type/:id" element={<AllProduct />} />
             <Route path="/product" element={<AllProduct />} />
             <Route path="/product/:id" element={<DetailProduct />} />
+            <Route path="/shop/:id" element={<Shop />} />
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/cart" element={<Cart />} />
               <Route path="/registerSeller" element={<RegisterSeller />} />

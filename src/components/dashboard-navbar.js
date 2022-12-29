@@ -26,7 +26,7 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 }));
 
 function DashboardNavbar() {
-  const { users, isSuccess, isError, message } = useSelector(
+  const { users } = useSelector(
     (state) => state.auth
   );
   const [anchorEl, setAnchorEl] = useState(null);
