@@ -25,7 +25,7 @@ function Login() {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isLoading, isError, message } = useSelector(
+  const { user,isError,message } = useSelector(
     (state) => state.auth
   );
 
@@ -36,7 +36,7 @@ function Login() {
     }
 
    
-  }, [isError, user, message, reset, dispatch,navigate]);
+  }, [user, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
