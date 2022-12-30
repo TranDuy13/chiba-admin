@@ -25,6 +25,7 @@ import Verify from "./pages/Verify";
 import DetailProduct from "./pages/DetailProduct";
 import ProductItem from "./pages/ProductItem";
 import Shop from "./pages/Shop";
+import StatusOrderUser from "./pages/StatusOrderUser";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="/registerSeller" element={<RegisterSeller />} />
               <Route path="/registerSeller/:id" element={<Verify />} />
               <Route path="/user" element={<AccountProfile />} />
+              <Route path="/user/purchase" element={<StatusOrderUser />} />
               <Route path="/seller" element={<PrivateRouteSeller />}>
                 <Route path="/seller" element={<Dashboard />} />
                 <Route path="/seller/customer" element={<Customer />} />

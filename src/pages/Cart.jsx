@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 
 import Header from "../components/Header/Header";
 import NavBottom from "../components/NavBottom/navBottom";
@@ -7,6 +7,7 @@ import "../components/product.scss";
 import { getCartByUser, reset } from "../components/features/cart/cartSlice";
 import _ from "lodash";
 import { Link } from "react-router-dom";
+import { buyProduct } from "../components/features/purchase/purchaseSlice";
 function Cart() {
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
@@ -21,11 +22,14 @@ function Cart() {
       dispatch(getCartByUser(user.data.admin._id));
     }
   }, [user, dispatch]);
-
+  const form = useRef()
   const [isCheckAll, setIsCheckAll] = useState();
   const [isCheck1, setIsCheck1] = useState([]);
   const [cartValue, setCart] = useState([]);
-  console.log(cartValue);
+  const [total, setTotal] = useState(0);
+
+
+ if(cart){
   return (
     <>
       <Header />
@@ -42,9 +46,14 @@ function Cart() {
                     setIsCheckAll(!isCheckAll);
                     setIsCheck1(cart.map((item) => item._id));
                     setCart(cart);
+                    cart.map((i) =>
+                      setTotal((prev) => prev + i.product.price * i.quantity)
+                    );
+
                     if (!e.target.checked) {
                       setIsCheck1([]);
                       setCart([]);
+                      setTotal(0);
                     }
                   }}
                   checked={
@@ -76,10 +85,16 @@ function Cart() {
                             const { checked, id } = e.target;
                             //   // setIsCheck([...isCheck, id]);
                             setIsCheck1(item.map((i) => i._id));
+                            item.map((i) =>
+                              setTotal(
+                                (prev) => prev + i.product.price * i.quantity
+                              )
+                            );
                             setCart(item);
                             if (!checked) {
                               setIsCheck1([]);
                               setCart([]);
+                              setTotal(0);
                             }
                           }}
                           className="mr-[20px]"
@@ -105,9 +120,17 @@ function Cart() {
                                 const { id, checked, name } = e.target;
                                 setIsCheck1([...isCheck1, name]);
                                 setCart([...cartValue, index]);
+                                setTotal(
+                                  (prev) =>
+                                    prev + index.product.price * index.quantity
+                                );
+
                                 if (!checked) {
                                   setIsCheck1(
                                     isCheck1.filter((item) => item !== name)
+                                  );
+                                  setTotal(
+                                    total - index.product.price * index.quantity
                                   );
                                   setCart(
                                     cartValue.filter(
@@ -145,7 +168,7 @@ function Cart() {
                                 đ
                               </span>
                             </div>
-                            <div className="w-[10.88022%]">
+                            <div className="w-[10.88022%]" >
                               <span className="m-0 font-light">
                                 {index.quantity}
                               </span>
@@ -162,7 +185,15 @@ function Cart() {
                               </span>
                             </div>
                             <div className="w-[]">
-                              <button className="m-0 font-light">Xoá</button>
+                              <button
+                                onClick={(e) => {
+                                  console.log(e);
+                                  console.log(index._id);
+                                }}
+                                className="m-0 font-light"
+                              >
+                                Xoá
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -172,16 +203,101 @@ function Cart() {
                 </div>
               )
             )}
+            <div className="bottom-0 bg-white z-50  shadow-gray-900 shadow-2xl sticky items-center box-border">
+              <div className="flex justify-between items-center">
+                <div className="flex justify-between pl-[30px]">
+                  {" "}
+                  <input
+                    type="checkbox"
+                    name="selectAll"
+                    id="selectAll"
+                    onClick={(e) => {
+                      const { checked, id } = e.target;
+                      //   // setIsCheck([...isCheck, id]);
+                      setIsCheck1(cart.map((i) => i._id));
+                      cart.map((i) =>
+                        setTotal((prev) => prev + i.product.price * i.quantity)
+                      );
+                      setCart(cart);
+                      if (!checked) {
+                        setIsCheck1([]);
+                        setCart([]);
+                        setTotal(0);
+                      }
+                    }}
+                    checked={
+                      !cart.map((i) => isCheck1.includes(i._id)).includes(false)
+                    }
+                    className="mr-[10px]"
+                  />
+                  <div> Chọn tất cả</div>
+                </div>
+
+                <div className="pl-[200px]">
+                  Tổng số tiền:{" "}
+                  {total.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })}{" "}
+                  đ
+                </div>
+
+                <button
+                onClick={(e)=>{
+                  e.preventDefault()
+                  const a=[]
+
+                    cartValue.map(item=>a.push({
+                      product:item.product._id,
+                      quantity: item.quantity,
+                      index: item.createdAt,
+                      seller: item.product
+                    },
+                     ))
+
+                  dispatch(buyProduct({
+                    customer:user.data.admin._id,
+                    products: a,
+                    address: form.current.value,
+                    total_amount: total
+
+                  }));
+                  dispatch(getCartByUser(user.data.admin._id));
+                }}
+                  id="navigate"
+                  className="text-white m-[10px] relative overflow-visible  outline-0 bg-orange-btn mr-[40px]  h-[40px] px-[20px] min-w-[70px] max-w-[220px]"
+                >
+                  Mua hàng
+                </button>
+              </div>
+
+              <div className="  ">
+                <div className="flex items-center justify-end w-[600px]">
+                  <div className="w-[20%] box-border pl-[20px] text-[rgba(85,85,85,.8)]">
+                    Địa chỉ
+                  </div>
+                  <div className="flex items-center  ml-[20px] box-border w-[400px] h-[40px] rounded-sm border-[1px] border-[rgba(0,0,0,.14)]">
+                    <input
+                      ref={form}
+                      style={{ outline: "none" }}
+                      id="address"
+                      name="address"
+                      required
+                      className="w-[100%] box-border pl-[20px]"
+                      defaultValue={user.data.admin.address}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="flex justify-center  text-[20px] pt-[200px] ml-auto mr-auto w-[1200px]">
-            Giỏ hàng trống
-          </div>
+          <div className="flex justify-center  text-[20px] pt-[200px] ml-auto mr-auto w-[1200px]"></div>
         )}
       </div>
-        <div className="bottom-0 z-50 flex sticky items-center box-border"></div>
+
       <NavBottom />
     </>
   );
+ }
 }
 export default Cart;

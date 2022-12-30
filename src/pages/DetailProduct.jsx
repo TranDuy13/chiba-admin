@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { reset, getProduct } from "../components/features/product/productSlice";
 import { Link } from "react-router-dom";
-import { addToCart } from "../components/features/cart/cartSlice";
+import { addToCart,getCartByUser } from "../components/features/cart/cartSlice";
 function DetailProduct() {
   const { product } = useSelector(
     (state) => state.product
@@ -67,6 +67,7 @@ function DetailProduct() {
           }
           setValue(1)
           dispatch(addToCart(data))
+          dispatch(getCartByUser(users.data.admin._id));
         } else {
           const data = {
             customer: users.data.admin._id,
@@ -74,6 +75,7 @@ function DetailProduct() {
             quantity: value
           }
           dispatch(addToCart(data))
+          dispatch(getCartByUser(users.data.admin._id));
         }
       } if (e.target.id == 'navigate')
       if (value == '') {
@@ -84,6 +86,7 @@ function DetailProduct() {
         }
         setValue(1)
         dispatch(addToCart(data))
+        dispatch(getCartByUser(users.data.admin._id));
         navigate('/cart');
       } else {
         const data = {
@@ -92,6 +95,7 @@ function DetailProduct() {
           quantity: value
         }
         dispatch(addToCart(data))
+        dispatch(getCartByUser(users.data.admin._id));
         navigate('/cart');
       }
     }
@@ -135,7 +139,7 @@ function DetailProduct() {
                           {product.data.name_product}
                         </h1>
                       </div>
-                      <div className="font-[400] p-1 mb-[10px]">Shop: {product.data.seller.name}</div>
+                      <div className="font-[400] p-1 mb-[10px]">Shop: {product.data.seller.fullname}</div>
                       <div className="font-[400] p-1 mb-[10px]">Loại sản phẩm: {product.data.category} </div>
                       <div className="font-[400] p-1 mb-[10px]">Tag: {product.data.tag}</div>
                       <div className="font-[400] p-1 mb-[10px]">Mã sản phẩm: {product.data._id}</div>
@@ -230,7 +234,7 @@ function DetailProduct() {
                 </Avatar>
               </Tooltip>
               <div className="visible font-[400] text-[1rem] overflow-hidden text-ellipsis whitespace-nowrap ">
-                Shop: {product.data.seller.name}
+                Shop: {product.data.seller.fullname}
                 <Link to={`/shop/${product.data.seller._id}`}>
                   <div className="border-[1px] border-[rgba(0,0,0,.09)] py-[5px] mt-[10px] flex items-center justify-center">
                     <button>Xem shop</button>

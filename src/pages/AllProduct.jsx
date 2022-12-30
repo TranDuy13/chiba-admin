@@ -67,7 +67,7 @@ function AllProduct() {
                                       ₫
                                     </span>
                                     <span className="text-[1rem] text-[#ee4d2d]">
-                                      45000
+                                      {item.price}
                                     </span>
                                   </div>
                                 </div>
