@@ -26,6 +26,9 @@ import DetailProduct from "./pages/DetailProduct";
 import ProductItem from "./pages/ProductItem";
 import Shop from "./pages/Shop";
 import StatusOrderUser from "./pages/StatusOrderUser";
+import DetailStatus from "./pages/DetailStatus";
+import DetailSeller from "./pages/DetailSeller";
+import Purchase from "./pages/Purchase";
 
 function App() {
   return (
@@ -43,10 +46,12 @@ function App() {
             <Route path="/shop/:id" element={<Shop />} />
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/cart" element={<Cart />} />
+              <Route path="/purchase/:id" element={<Purchase />} />
               <Route path="/registerSeller" element={<RegisterSeller />} />
               <Route path="/registerSeller/:id" element={<Verify />} />
               <Route path="/user" element={<AccountProfile />} />
               <Route path="/user/purchase" element={<StatusOrderUser />} />
+              <Route path="/user/purchase/:id" element={<DetailStatus />} />
               <Route path="/seller" element={<PrivateRouteSeller />}>
                 <Route path="/seller" element={<Dashboard />} />
                 <Route path="/seller/customer" element={<Customer />} />
@@ -57,6 +62,7 @@ function App() {
                 <Route path="/seller/add" element={<Payment />} />
                 <Route path="/seller/budget" element={<BudgetUser />} />
                 <Route path="/seller/statusOrders" element={<StatusOrder />} />
+                <Route path="/seller/statusOrders/:id" element={<DetailSeller  />} />
               </Route>
             </Route>
             {/* <Route path="*" element={<NotFound />} /> */}

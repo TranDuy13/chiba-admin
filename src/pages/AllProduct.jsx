@@ -27,9 +27,13 @@ function AllProduct() {
   };
   
   if (products) {
+
     return (
       <>
         <Header />
+        {
+          console.log(products)
+        }
         <div className="bg-gray-09 min-h-[50rem] mt-[130px] ml-auto mr-auto">
           <div className="bg-gray-09 border-b-[5px] border-[#ee4d2d] ">
             <div className="mr-auto ml-auto w-[1200px]">
@@ -75,15 +79,6 @@ function AllProduct() {
                             </div></Link>
                         ) : null
                       )}
-                    </div>
-                    <div className="flex w-full justify-center my-[15px]">
-                      {products.data.length > page * 18 ? (
-                        <button className="bg-white p-3" onClick={handleClick}>
-                          <Link to="">Xem thêm</Link>
-                        </button>
-                      ) : <button className=" p-3 text-gray-54 leading-7">
-                        HẾT
-                      </button>}
                     </div>
                   </div>
                 </div>

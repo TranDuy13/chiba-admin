@@ -146,7 +146,7 @@ function DetailProduct() {
                       <div className="text-orange-btn font-bold text-[50px] p-1 mt-[10px]">
                         {product.data.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}đ
                       </div>
-                      <div className="font-[400] p-1">Vận chuyển tới: </div>
+                      {/* <div className="font-[400] p-1">Vận chuyển tới:{users.data.admin.address} </div> */}
                       <div className="font-[300] p-1 italic">
                         Mô tả sản phẩm:
                         <div className="break-words">
@@ -195,13 +195,13 @@ function DetailProduct() {
                   <div className="text-[15px] flex mt-2">
                     {" "}
                     <AddModeratorOutlinedIcon color="success" />
-                    <div className="ml-[5px]">Cam kết sản phẩm tự code</div>
+                    <div className="ml-[5px]">Cam kết sản phẩm đạt chất lương</div>
                   </div>
                   <div className="text-[15px] flex mt-2">
                     {" "}
                     <CarRentalIcon color="success" />
                     <div className="ml-[5px]">
-                      Giáo viên phụ trách
+                      Design by Duy
                     </div>
                   </div>
                   <div className="text-[15px] flex mt-2">
@@ -209,7 +209,7 @@ function DetailProduct() {
                     <BorderColorOutlinedIcon color="success" />
                     <div className="ml-[5px]">
                       {" "}
-                      Nhật Duy - Nho Nam - Văn Khánh - Trọng Anh
+                      Nhật Duy
                     </div>
                   </div>
                   <div className="mr-[7px] mt-2 flex">

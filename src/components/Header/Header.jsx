@@ -84,7 +84,7 @@ function Header() {
 
               <li className="cursor-pointer select-none flex items-center text-white justify-center relative pl-625">
                 <div className="relative cursor-pointer">
-                  <Link to="/" className="notifi">
+                  <Link to="/user/purchase" className="notifi">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5  inline-block relative overflow-hidden"
@@ -100,7 +100,7 @@ function Header() {
                       />
                     </svg>
                     <span className="ml-0.3125 font-extralight texts capitalize">
-                      Tiếng việt
+                      Đơn hàng
                     </span>
                   </Link>
                 </div>

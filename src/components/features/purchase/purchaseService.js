@@ -14,9 +14,14 @@ const getStatusByUser = async (data) => {
     const response = await axios.post(`${API_URL}/purchase/seller`, data);
     return response.data;
   };
+  const getStatusId = async (id) => {
+    const response = await axios.get(`${API_URL}/purchase/get/${id}`);
+    return response.data;
+  };
 const purchaseService = {
   buyProduct,
   getStatusByUser,
-  getStatusBySeller
+  getStatusBySeller,
+  getStatusId
 };
 export default purchaseService;

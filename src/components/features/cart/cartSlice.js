@@ -27,6 +27,24 @@ export const addToCart = createAsyncThunk(
     }
   }
 );
+export const deleteCart = createAsyncThunk(
+  "cart/delete",
+  async (data, thunkAPI) => {
+    try {
+        
+      return await cartService.deleteCart(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 export const getCartByUser = createAsyncThunk(
     "cart/get",
     async (data, thunkAPI) => {
@@ -88,6 +106,23 @@ export const cartSlice = createSlice({
         state.message= action.payload
       })
       .addCase(getCartByUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteCart.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(deleteCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.cart= action.payload.data
+        state.message= action.payload
+      })
+      .addCase(deleteCart.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -5,9 +5,9 @@ import { Box, Container } from "@mui/material";
 import { CustomerListResults } from "../components/customer/customer-list-results";
 import { CustomerListToolbar } from "../components/customer/customer-list-toolbar";
 import { useEffect } from "react";
-import { customers } from "../__mocks__/customers";
 
 function Customer() {
+  const customers=[]
   return (
     <>
       <ThemeProvider theme={theme}>

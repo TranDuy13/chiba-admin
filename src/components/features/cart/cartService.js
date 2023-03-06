@@ -7,12 +7,16 @@ const addToCart = async (data) => {
   return response.data;
 };
 const getCartByUser = async (id) => {
-
-  const response = await axios.get(`${API_URL}/get/cart/user/${id}`);
+  const response = await axios.get(`${API_URL}/get/cartuser/${id}`);
+  return response.data;
+};
+const deleteCart = async (id) => {
+  const response = await axios.delete(`${API_URL}/delete/${id}`);
   return response.data;
 };
 const cartService = {
   addToCart,
   getCartByUser,
+  deleteCart
 };
 export default cartService;

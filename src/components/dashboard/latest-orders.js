@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { SeverityPill } from "../severity-pill";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getStatusBySeller,reset } from "../features/purchase/purchaseSlice";
 const orders = [
@@ -33,6 +33,7 @@ export const LatestOrders = (props) => {
   const { user } = useSelector(
     (state) => state.auth
   );
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(reset())
@@ -94,7 +95,7 @@ useEffect(()=>{
                   ? purchase.data.slice(page * limit, page * limit + limit)
                   : purchase.data
                 ).map((order) => (
-                  <TableRow hover key={order.id}>
+                  <TableRow hover key={order.id} onClick={()=>{navigate(`/seller/statusOrders/${order._id}`)}} >
                     <TableCell>{order._id}</TableCell>
                     <TableCell>{order.customer.fullname}</TableCell>
                     <TableCell>{order.total_amount.toLocaleString(undefined, { maximumFractionDigits: 2 })}đ</TableCell>

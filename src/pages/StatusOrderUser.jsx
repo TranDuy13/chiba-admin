@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { SeverityPill } from "../components/severity-pill";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getStatusByUser,
@@ -31,6 +31,7 @@ const StatusOrderUser = (props) => {
   const { purchase } = useSelector((state) => state.purchase);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   useEffect(() => {
     dispatch(reset());
     dispatch(getStatusByUser({ id: user.data.admin._id }));
@@ -65,6 +66,7 @@ const StatusOrderUser = (props) => {
     return (
       <>
         <Header />
+        
         <div className="bg-gray-09 border-b-[5px] border-[#ee4d2d] min-h-[600px]">
         <div className="flex flex-col py-[150px] ml-auto mr-auto w-[1200px] ">
           <Card>
@@ -93,8 +95,8 @@ const StatusOrderUser = (props) => {
                       ? purchase.data.slice(page * limit, page * limit + limit)
                       : purchase.data
                     ).map((order) => (
-                      <TableRow hover key={order.id}>
-                        <TableCell>{order._id}</TableCell>
+                      <TableRow hover key={order.id} onClick={()=>{navigate(`/user/purchase/${order._id}`)}} >
+                        <Link to={`/user/purchase/${order._id}`}><TableCell>{order._id}</TableCell></Link>
                         <TableCell>{order.customer.fullname}</TableCell>
                         <TableCell>
                           {order.total_amount.toLocaleString(undefined, {
